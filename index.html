@@ -2,23 +2,27 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Blood Clicker</title>
+  <title>Blood Engine</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="ui">
-    <p>🩸 Sang total : <span id="score">0</span></p>
-    <p>⚡ Sang/sec : <span id="bps">0</span></p>
-    <p>🖱️ Sang/clic : <span id="bpc">1</span></p>
-  </div>
+<div class="topbar">
+  <div>🩸 <span id="blood">0</span></div>
+  <div>⚡ <span id="bps">0</span>/s</div>
+  <div>🖱️ <span id="bpc">1</span>/clic</div>
+</div>
 
-  <div class="game">
-    <img src="minos.png" id="minos">
-  </div>
+<div id="eventBanner"></div>
 
-  <audio id="clickSound" src="click.mp3"></audio>
+<img src="chibi_minos.png" id="minos">
 
-  <script src="script.js"></script>
+<audio id="clickSound" src="click.mp3"></audio>
+<audio id="music" src="music_normal.mp3" loop></audio>
+<audio id="musicEvent" src="music_event.mp3" loop></audio>
+
+<button id="resetBtn">RESET</button>
+
+<script src="script.js"></script>
 </body>
 </html>
