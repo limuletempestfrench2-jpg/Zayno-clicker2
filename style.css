@@ -1,0 +1,16 @@
+body {
+  text-align: center;
+  background-color: #111;
+  color: white;
+  font-family: Arial;
+}
+
+#minos {
+  width: 250px;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+#minos:active {
+  transform: scale(0.9);
+}
