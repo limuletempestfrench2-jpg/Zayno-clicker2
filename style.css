@@ -1,9 +1,7 @@
 body {
-  margin: 0;
-  font-family: Arial;
-  color: red;
-  background: radial-gradient(circle, #1a0000, #000);
+  background: url("background.png") center/cover no-repeat;
 }
+
 
 /* overlay sombre */
 body::before {
