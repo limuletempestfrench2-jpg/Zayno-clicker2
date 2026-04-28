@@ -1,30 +1,37 @@
 body {
   margin: 0;
-  height: 100vh;
-  text-align: center;
-  font-family: Impact, Arial;
+  background: radial-gradient(circle, #1a0000, #000);
   color: red;
-  background: radial-gradient(circle at center, #1a0000, #000000);
-  overflow: hidden;
+  font-family: Impact;
+  text-align: center;
 }
 
-.ui {
-  margin-top: 20px;
-  font-size: 22px;
+.topbar {
+  display: flex;
+  justify-content: space-around;
+  font-size: 20px;
+  padding: 10px;
   text-shadow: 0 0 10px red;
-}
-
-.game {
-  margin-top: 60px;
 }
 
 #minos {
   width: 260px;
+  margin-top: 50px;
   cursor: pointer;
   filter: drop-shadow(0 0 20px red);
-  transition: transform 0.1s;
 }
 
-#minos:active {
-  transform: scale(0.9);
+#eventBanner {
+  font-size: 30px;
+  margin-top: 10px;
+  height: 40px;
+  text-shadow: 0 0 20px crimson;
+}
+
+button {
+  margin-top: 30px;
+  padding: 10px;
+  background: black;
+  color: red;
+  border: 1px solid red;
 }
