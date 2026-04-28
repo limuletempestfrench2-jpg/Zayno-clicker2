@@ -35,3 +35,11 @@ button {
   color: red;
   border: 1px solid red;
 }
+.shop, .ascension {
+  margin-top: 30px;
+}
+
+button:hover {
+  background: red;
+  color: black;
+}
