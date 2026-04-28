@@ -2,15 +2,20 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Minos Clicker</title>
+  <title>Blood Clicker</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <h1>Minos Clicker</h1>
-  <p>Clics : <span id="score">0</span></p>
+  <div class="ui">
+    <p>🩸 Sang total : <span id="score">0</span></p>
+    <p>⚡ Sang/sec : <span id="bps">0</span></p>
+    <p>🖱️ Sang/clic : <span id="bpc">1</span></p>
+  </div>
 
-  <img src="minos.png" id="minos" alt="Minos">
+  <div class="game">
+    <img src="minos.png" id="minos">
+  </div>
 
   <audio id="clickSound" src="click.mp3"></audio>
 
