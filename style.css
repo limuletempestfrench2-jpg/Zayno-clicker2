@@ -1,13 +1,27 @@
 body {
+  margin: 0;
+  height: 100vh;
   text-align: center;
-  background-color: #111;
-  color: white;
-  font-family: Arial;
+  font-family: Impact, Arial;
+  color: red;
+  background: radial-gradient(circle at center, #1a0000, #000000);
+  overflow: hidden;
+}
+
+.ui {
+  margin-top: 20px;
+  font-size: 22px;
+  text-shadow: 0 0 10px red;
+}
+
+.game {
+  margin-top: 60px;
 }
 
 #minos {
-  width: 250px;
+  width: 260px;
   cursor: pointer;
+  filter: drop-shadow(0 0 20px red);
   transition: transform 0.1s;
 }
 
