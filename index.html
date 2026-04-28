@@ -7,34 +7,28 @@
 </head>
 <body>
 
-<div class="topbar">
-  <div>🩸 <span id="blood">0</span></div>
-  <div>⚡ <span id="bps">0</span>/s</div>
-  <div>🖱️ <span id="bpc">1</span>/clic</div>
+<div class="container">
+
+  <!-- GAUCHE -->
+  <div class="left">
+    <h2>BLOOD</h2>
+    <p>🩸 <span id="blood">0</span></p>
+    <p>⚡ <span id="bps">0</span>/s</p>
+    <p>🖱️ <span id="bpc">1</span>/clic</p>
+  </div>
+
+  <!-- CENTRE -->
+  <div class="center">
+    <img src="Chibi_minos.png" id="minos">
+  </div>
+
+  <!-- DROITE SHOP -->
+  <div class="shop" id="shop"></div>
+
 </div>
 
-<div id="eventBanner"></div>
-
-<img src="Chibi_minos.png" id="minos">
-
 <audio id="clickSound" src="click.mp3"></audio>
-<audio id="music" src="music_normal.mp3" loop></audio>
-<audio id="musicEvent" src="music_event.mp3" loop></audio>
-
-<button id="resetBtn">RESET</button>
 
 <script src="script.js"></script>
 </body>
 </html>
-<div class="shop">
-  <h2>🛒 Shop</h2>
-
-  <button onclick="buyClick()">+1 Sang/clic (coût: <span id="costClick">10</span>)</button>
-  <button onclick="buyAuto()">+1 Sang/sec (coût: <span id="costAuto">25</span>)</button>
-</div>
-
-<div class="ascension">
-  <h2>🔁 Ascension</h2>
-  <p>Ascensions : <span id="asc">0</span></p>
-  <button onclick="ascend()">Ascend (coût: 1000 sang)</button>
-</div>
