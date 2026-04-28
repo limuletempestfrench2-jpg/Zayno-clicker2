@@ -1,46 +1,92 @@
 body {
   margin: 0;
-  color: red;
   font-family: Arial;
+  color: red;
 
   background: url("background.png") no-repeat center center fixed;
   background-size: cover;
 }
 
-.topbar {
+/* overlay sombre */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  pointer-events: none;
+}
+
+/* layout */
+.container {
   display: flex;
-  justify-content: space-around;
-  font-size: 20px;
-  padding: 10px;
+  height: 100vh;
+}
+
+/* LEFT PANEL */
+.left {
+  width: 20%;
+  padding: 20px;
+  background: rgba(0,0,0,0.6);
+  border-right: 2px solid red;
   text-shadow: 0 0 10px red;
 }
 
+/* CENTER */
+.center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 #minos {
-  width: 260px;
-  margin-top: 50px;
+  width: 300px;
   cursor: pointer;
-  filter: drop-shadow(0 0 20px red);
+  filter: drop-shadow(0 0 25px red);
+  transition: transform 0.1s;
 }
 
-#eventBanner {
-  font-size: 30px;
-  margin-top: 10px;
-  height: 40px;
-  text-shadow: 0 0 20px crimson;
+#minos:active {
+  transform: scale(0.9);
 }
 
-button {
-  margin-top: 30px;
-  padding: 10px;
-  background: black;
-  color: red;
+/* SHOP */
+.shop {
+  width: 30%;
+  padding: 20px;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(6px);
+  overflow-y: auto;
+  border-left: 2px solid red;
+}
+
+/* upgrade */
+.upgrade {
+  background: #111;
   border: 1px solid red;
-}
-.shop, .ascension {
-  margin-top: 30px;
+  padding: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  position: relative;
 }
 
-button:hover {
+.upgrade:hover {
   background: red;
   color: black;
+}
+
+.tooltip {
+  display: none;
+  position: absolute;
+  left: -200px;
+  top: 0;
+  width: 180px;
+  background: black;
+  border: 1px solid red;
+  padding: 5px;
+  font-size: 12px;
+}
+
+.upgrade:hover .tooltip {
+  display: block;
 }
