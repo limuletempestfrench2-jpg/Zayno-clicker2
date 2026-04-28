@@ -167,7 +167,7 @@ app.innerHTML = `
 
     <div class="dollWrap">
       <button id="click" class="dollBtn" aria-label="Cliquer">
-        <img class="doll" src="/poupee.png" alt="Poupée" />
+        <img class="doll" src="./poupee.png" alt="Poupée" />
       </button>
     </div>
 
