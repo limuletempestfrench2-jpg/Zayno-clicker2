@@ -1,7 +1,5 @@
 const app = document.querySelector("#app");
-
 const SAVE_KEY = "zayno_clicker_save_v1";
-
 const state = {
   score: 0,
   clickPower: 1,
@@ -36,11 +34,9 @@ const state = {
     }
   ]
 };
-
 function upgradeCost(u) {
   return Math.floor(u.baseCost * Math.pow(u.costMult, u.level));
 }
-
 function computeAutoPerSec() {
   let total = state.baseAutoPerSec;
   for (const u of state.upgrades) {
@@ -49,19 +45,16 @@ function computeAutoPerSec() {
   }
   return total;
 }
-
 function computeClickPower() {
   let total = state.clickPower;
   const clickUp = state.upgrades.find((u) => u.id === "click");
   if (clickUp) total += clickUp.level * 1;
   return total;
 }
-
 function format(n) {
   const x = Math.floor(n);
   return x.toLocaleString("fr-FR");
 }
-
 app.innerHTML = `
   <style>
     :root {
@@ -145,11 +138,9 @@ app.innerHTML = `
     .card .meta { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; font-size: 12px; opacity: 0.95; }
     .footer { margin-top: 14px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
   </style>
-
   <div class="wrap">
     <h1>Clicker Abyssal</h1>
     <div id="score" class="score">0</div>
-
     <div class="stats">
       <div class="stat">
         <div class="k">Puissance de clic</div>
@@ -164,23 +155,19 @@ app.innerHTML = `
         <div id="statScore" class="v">0</div>
       </div>
     </div>
-
     <div class="dollWrap">
       <button id="click" class="dollBtn" aria-label="Cliquer">
-        <img class="doll" src="./poupee.png" alt="Poupée" />
+        <img class="doll" src="${import.meta.env.BASE_URL}poupee.png" alt="Poupée" />
       </button>
     </div>
-
     <h2 style="margin: 18px 0 10px;">Améliorations</h2>
     <div id="upgrades" class="grid"></div>
-
     <div class="footer">
       <button id="save">Sauvegarder</button>
       <button id="reset">Reset</button>
     </div>
   </div>
 `;
-
 const el = {
   score: document.getElementById("score"),
   statClick: document.getElementById("statClick"),
@@ -191,7 +178,6 @@ const el = {
   saveBtn: document.getElementById("save"),
   resetBtn: document.getElementById("reset")
 };
-
 function renderUpgrades() {
   el.upgrades.innerHTML = state.upgrades
     .map((u) => {
@@ -213,7 +199,6 @@ function renderUpgrades() {
     })
     .join("");
 }
-
 function updateHUD() {
   const clickPower = computeClickPower();
   const autoPerSec = computeAutoPerSec();
@@ -223,7 +208,6 @@ function updateHUD() {
   el.statScore.textContent = format(state.score);
   renderUpgrades();
 }
-
 function buyUpgrade(id) {
   const u = state.upgrades.find((x) => x.id === id);
   if (!u) return;
@@ -233,24 +217,20 @@ function buyUpgrade(id) {
   u.level += 1;
   updateHUD();
 }
-
 function clicker() {
   state.score += computeClickPower();
   updateHUD();
 }
-
 function spawnFloatText(x, y, text) {
   const node = document.createElement("div");
   node.className = "floatText";
   node.textContent = text;
   document.body.appendChild(node);
-
   const dx = (Math.random() * 2 - 1) * 18;
   const startY = y - 12;
   const endY = y - 70 - Math.random() * 20;
   node.style.opacity = "1";
   node.style.transform = `translate(${x + dx}px, ${startY}px) scale(1)`;
-
   const duration = 520;
   const t0 = performance.now();
   function anim(t) {
@@ -264,11 +244,9 @@ function spawnFloatText(x, y, text) {
   }
   requestAnimationFrame(anim);
 }
-
 function save() {
   localStorage.setItem(SAVE_KEY, JSON.stringify(state));
 }
-
 function load() {
   const raw = localStorage.getItem(SAVE_KEY);
   if (!raw) return;
@@ -287,7 +265,6 @@ function load() {
     // ignore corrupted saves
   }
 }
-
 function reset() {
   localStorage.removeItem(SAVE_KEY);
   state.score = 0;
@@ -296,7 +273,6 @@ function reset() {
   for (const u of state.upgrades) u.level = 0;
   updateHUD();
 }
-
 el.clickBtn.addEventListener("click", clicker);
 el.clickBtn.addEventListener("pointerdown", (e) => {
   const x = "clientX" in e ? e.clientX : window.innerWidth / 2;
@@ -314,7 +290,6 @@ el.upgrades.addEventListener("click", (e) => {
   if (!card) return;
   buyUpgrade(card.getAttribute("data-upgrade"));
 });
-
 let last = performance.now();
 function tick(now) {
   const dt = Math.min(0.25, (now - last) / 1000);
@@ -324,10 +299,7 @@ function tick(now) {
   updateHUD();
   requestAnimationFrame(tick);
 }
-
 load();
 updateHUD();
 requestAnimationFrame(tick);
-
 setInterval(save, 3000);
-
