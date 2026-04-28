@@ -1,9 +1,10 @@
 body {
   margin: 0;
-  background: radial-gradient(circle, #1a0000, #000);
   color: red;
-  font-family: Impact;
-  text-align: center;
+  font-family: Arial;
+
+  background: url("background.png") no-repeat center center fixed;
+  background-size: cover;
 }
 
 .topbar {
