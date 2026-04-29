@@ -7,6 +7,7 @@ const bpcEl = document.getElementById("bpc");
 const bpsEl = document.getElementById("bps");
 const minos = document.getElementById("minos");
 const shopDiv = document.getElementById("shop");
+const eventBox = document.getElementById("eventBox");
 const sound = document.getElementById("clickSound");
 
 // UPGRADES
@@ -38,6 +39,36 @@ setInterval(() => {
   blood += bps;
   updateUI();
 }, 1000);
+
+// EVENTS
+setInterval(() => {
+  let r = Math.random();
+
+  if (r < 0.3) {
+    eventBox.textContent = "⚡ OVERDRIVE x3";
+    bpc *= 3;
+    bps *= 3;
+
+    setTimeout(() => {
+      bpc /= 3;
+      bps /= 3;
+      eventBox.textContent = "Aucun événement";
+    }, 60000);
+  }
+
+  if (r > 0.7) {
+    eventBox.textContent = "💀 APOCALYPSE x10";
+    bpc *= 10;
+    bps *= 10;
+
+    setTimeout(() => {
+      bpc /= 10;
+      bps /= 10;
+      eventBox.textContent = "Aucun événement";
+    }, 60000);
+  }
+
+}, 120000);
 
 // SHOP
 function renderShop() {
