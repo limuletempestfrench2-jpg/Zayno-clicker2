@@ -21,15 +21,24 @@ let lastQuoteTime = 0;
 
 // UPGRADES (propres + sans les 4 derniers)
 let upgrades = [
-  {name:"Judgement", type:"click", power:1, cost:10, desc:"+1 clic"},
-  {name:"Reckoning", type:"click", power:3, cost:100, desc:"+3 clic"},
+  // CLIC
+  {name:"Judgement", type:"click", power:1, cost:10, desc:"+1 sang par clic"},
+  {name:"Useless", type:"click", power:2, cost:50, desc:"+2 sang par clic"},
+  {name:"Die", type:"click", power:5, cost:150, desc:"+5 sang par clic"},
+  {name:"Prepare Thyself", type:"click", power:10, cost:500, desc:"+10 sang par clic"},
 
-  {name:"Thy End", type:"auto", power:2, cost:50, desc:"+2/sec"},
-  {name:"Gore", type:"auto", power:5, cost:200, desc:"+5/sec"},
+  // AUTO
+  {name:"Thy End", type:"auto", power:1, cost:25, desc:"+1 sang/sec"},
+  {name:"Reckoning", type:"auto", power:3, cost:100, desc:"+3 sang/sec"},
+  {name:"Gore", type:"auto", power:8, cost:300, desc:"+8 sang/sec"},
+  {name:"Steel", type:"auto", power:20, cost:800, desc:"+20 sang/sec"},
+  {name:"Punishment", type:"auto", power:50, cost:2000, desc:"+50 sang/sec"},
 
-  {name:"SP: Overdrive", type:"sp", power:3, cost:500, desc:"boost global"},
-  {name:"SPS: Auto I", type:"sps", power:2, cost:800, desc:"+2 auto clic/sec"},
-  {name:"SPS: Auto II", type:"sps", power:4, cost:1500, desc:"+4 auto clic/sec"}
+  // 🔥 LES 4 DERNIERS REMIS (sans SP supprimés)
+  {name:"Wrath", type:"click", power:25, cost:5000, desc:"+25 clic"},
+  {name:"Divine Strike", type:"click", power:50, cost:12000, desc:"+50 clic"},
+  {name:"Annihilation", type:"auto", power:100, cost:20000, desc:"+100/sec"},
+  {name:"Final Judgement", type:"auto", power:250, cost:50000, desc:"+250/sec"}
 ];
 
 // CLICK
