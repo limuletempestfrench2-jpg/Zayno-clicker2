@@ -5,36 +5,29 @@ body {
   background: radial-gradient(circle, #1a0000, #000);
 }
 
-/* TOP BAR */
-.topbar {
-  display: flex;
-  justify-content: space-around;
-  padding: 10px;
-  background: black;
-  border-bottom: 2px solid red;
+/* NAV TOP RIGHT */
+.nav {
+  position: fixed;
+  top: 10px;
+  right: 20px;
 }
 
-.tabBtn {
-  width: 30%;
-  padding: 10px;
-  background: #111;
-  border: 1px solid red;
-  color: red;
+.nav span {
+  margin-left: 15px;
   cursor: pointer;
   transition: 0.2s;
 }
 
-.tabBtn:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 15px red;
-  background: red;
-  color: black;
+.nav span:hover {
+  color: white;
+  text-shadow: 0 0 10px red;
+  transform: scale(1.2);
 }
 
 /* layout */
 .container {
   display: flex;
-  height: calc(100vh - 60px);
+  height: 100vh;
 }
 
 /* LEFT */
@@ -60,6 +53,7 @@ body {
 #minos {
   width: 300px;
   cursor: pointer;
+  transition: transform 0.1s;
 }
 
 /* RIGHT */
@@ -72,28 +66,26 @@ body {
 }
 
 /* TABS */
-.tab {
-  display: none;
-}
+.tab { display: none; }
+.tab.active { display: block; }
 
-.tab.active {
-  display: block;
-}
-
-/* SHOP */
+/* SHOP BLOCKS */
 .upgrade {
+  background: #111;
   border: 1px solid red;
   padding: 10px;
   margin-bottom: 10px;
   cursor: pointer;
+  transition: 0.2s;
 }
 
 .upgrade:hover {
   background: red;
   color: black;
+  transform: scale(1.05);
 }
 
-/* PROFILE */
+/* INPUT */
 input, textarea {
   width: 100%;
   margin-bottom: 10px;
