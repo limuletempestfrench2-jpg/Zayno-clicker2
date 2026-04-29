@@ -22,7 +22,7 @@ const quotes = [
   "THY END IS NOW!"
 ];
 
-// UPGRADES
+// UPGRADES (ORDRE SP / SPS / SPS / SP)
 let upgrades = [
   {name:"Judgement", type:"click", power:1, cost:10, desc:"+1 clic"},
   {name:"Useless", type:"click", power:2, cost:50, desc:"+2 clic"},
@@ -35,7 +35,12 @@ let upgrades = [
   {name:"Steel", type:"auto", power:20, cost:800, desc:"+20/sec"},
   {name:"Punishment", type:"auto", power:50, cost:2000, desc:"+50/sec"},
 
-  {name:"SP: Ascension Protocol", type:"sps", power:2, cost:3000, desc:"+2 auto-clic/sec"}
+  {name:"SP: Overdrive Core", type:"sp", power:2, cost:3000, desc:"Boost global"},
+
+  {name:"SPS: Auto Strike I", type:"sps", power:2, cost:1500, desc:"+2 auto clic/sec"},
+  {name:"SPS: Auto Strike II", type:"sps", power:5, cost:4000, desc:"+5 auto clic/sec"},
+
+  {name:"SP: Blood Protocol", type:"sp", power:5, cost:8000, desc:"Boost massif"}
 ];
 
 // CLICK
@@ -110,6 +115,10 @@ function buyUpgrade(i) {
     if (u.type === "click") bpc += u.power;
     if (u.type === "auto") bps += u.power;
     if (u.type === "sps") sps += u.power;
+    if (u.type === "sp") {
+      bpc += u.power;
+      bps += u.power;
+    }
 
     u.cost = Math.floor(u.cost * 1.6);
     u.power = Math.floor(u.power * 1.2);
@@ -127,7 +136,30 @@ function updateUI() {
   spsEl.textContent = sps;
 }
 
-// EFFECTS
+// QUOTES RANDOM CENTRE UNIQUEMENT
+function showQuote() {
+  const zone = document.querySelector(".center");
+
+  let q = document.createElement("div");
+  q.textContent = quotes[Math.floor(Math.random()*quotes.length)];
+
+  q.style.position = "absolute";
+  q.style.color = "red";
+  q.style.fontSize = "28px";
+  q.style.fontWeight = "bold";
+
+  let x = Math.random() * 80 + 10;
+  let y = Math.random() * 80 + 10;
+
+  q.style.left = x + "%";
+  q.style.top = y + "%";
+
+  zone.appendChild(q);
+
+  setTimeout(() => q.remove(), 600);
+}
+
+// CLICK FX
 function clickEffect() {
   let fx = document.createElement("div");
 
@@ -145,26 +177,6 @@ function clickEffect() {
   setTimeout(() => fx.remove(), 200);
 }
 
-function showQuote() {
-  const gameZone = document.querySelector(".center");
-
-  let q = document.createElement("div");
-  q.textContent = quotes[Math.floor(Math.random() * quotes.length)];
-
-  q.style.position = "absolute";
-  q.style.color = "red";
-  q.style.fontSize = "28px";
-  q.style.fontWeight = "bold";
-  q.style.pointerEvents = "none";
-
-  // position RANDOM dans la zone centre
-  let x = Math.random() * 80 + 10; // évite bords
-  let y = Math.random() * 80 + 10;
-
-  q.style.left = x + "%";
-  q.style.top = y + "%";
-
-  gameZone.appendChild(q);
-
-  setTimeout(() => q.remove(), 600);
-}
+// INIT
+renderShop();
+updateUI();
