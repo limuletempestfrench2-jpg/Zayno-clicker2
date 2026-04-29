@@ -5,10 +5,36 @@ body {
   background: radial-gradient(circle, #1a0000, #000);
 }
 
+/* TOP BAR */
+.topbar {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  background: black;
+  border-bottom: 2px solid red;
+}
+
+.tabBtn {
+  width: 30%;
+  padding: 10px;
+  background: #111;
+  border: 1px solid red;
+  color: red;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.tabBtn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px red;
+  background: red;
+  color: black;
+}
+
 /* layout */
 .container {
   display: flex;
-  height: 100vh;
+  height: calc(100vh - 60px);
 }
 
 /* LEFT */
@@ -21,7 +47,6 @@ body {
   background: rgba(0,0,0,0.7);
   border: 2px solid red;
   padding: 10px;
-  box-shadow: 0 0 15px red;
 }
 
 /* CENTER */
@@ -30,27 +55,11 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
-}
-
-.center::before {
-  content: "";
-  position: absolute;
-  width: 350px;
-  height: 350px;
-  background: radial-gradient(circle, rgba(255,0,0,0.4), transparent);
-  border-radius: 50%;
-  filter: blur(40px);
 }
 
 #minos {
   width: 300px;
   cursor: pointer;
-  filter: drop-shadow(0 0 20px red);
-}
-
-#minos:active {
-  transform: scale(0.9);
 }
 
 /* RIGHT */
@@ -62,77 +71,33 @@ body {
   overflow-y: auto;
 }
 
-/* HEADER SHOP */
-.shopHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+/* TABS */
+.tab {
+  display: none;
 }
 
-#ascendBtn {
-  background: black;
+.tab.active {
+  display: block;
+}
+
+/* SHOP */
+.upgrade {
   border: 1px solid red;
-  color: red;
+  padding: 10px;
+  margin-bottom: 10px;
   cursor: pointer;
-  padding: 5px;
 }
 
-#ascendBtn:hover {
+.upgrade:hover {
   background: red;
   color: black;
 }
 
-/* SHOP BLOCKS */
-.upgrade {
-  background: linear-gradient(145deg, #0a0a0a, #1a0000);
-  border: 1px solid crimson;
-  border-radius: 10px;
-  padding: 12px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  position: relative;
-  transition: 0.2s;
-}
-
-.upgrade:hover {
-  transform: scale(1.05);
-  background: crimson;
-  color: black;
-}
-
-.upgrade.buy {
-  animation: flash 0.3s;
-}
-
-@keyframes flash {
-  0% { background: red; }
-  100% { }
-}
-
-/* TOOLTIP */
-.tooltip {
-  position: absolute;
-  left: -200px;
-  top: 0;
+/* PROFILE */
+input, textarea {
+  width: 100%;
+  margin-bottom: 10px;
   background: black;
+  color: red;
   border: 1px solid red;
-  padding: 8px;
-  opacity: 0;
-  transition: 0.2s;
-}
-
-.upgrade:hover .tooltip {
-  opacity: 1;
-}
-
-/* ASCENSION PANEL */
-#ascensionPanel {
-  position: fixed;
-  top: 20%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: black;
-  border: 2px solid red;
-  padding: 20px;
-  display: none;
 }
