@@ -146,20 +146,25 @@ function clickEffect() {
 }
 
 function showQuote() {
-  let q = document.createElement("div");
+  const gameZone = document.querySelector(".center");
 
-  q.textContent = quotes[Math.floor(Math.random()*quotes.length)];
+  let q = document.createElement("div");
+  q.textContent = quotes[Math.floor(Math.random() * quotes.length)];
+
   q.style.position = "absolute";
   q.style.color = "red";
-  q.style.fontSize = "30px";
-  q.style.left = "50%";
-  q.style.top = "50%";
-  q.style.transform = "translate(-50%, -50%)";
+  q.style.fontSize = "28px";
+  q.style.fontWeight = "bold";
+  q.style.pointerEvents = "none";
 
-  document.body.appendChild(q);
-  setTimeout(() => q.remove(), 500);
+  // position RANDOM dans la zone centre
+  let x = Math.random() * 80 + 10; // évite bords
+  let y = Math.random() * 80 + 10;
+
+  q.style.left = x + "%";
+  q.style.top = y + "%";
+
+  gameZone.appendChild(q);
+
+  setTimeout(() => q.remove(), 600);
 }
-
-// INIT
-renderShop();
-updateUI();
