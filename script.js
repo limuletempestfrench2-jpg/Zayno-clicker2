@@ -11,24 +11,21 @@ const bpsEl = document.getElementById("bps");
 
 const minos = document.getElementById("minos");
 const shopDiv = document.getElementById("shop");
-const ascShopDiv = document.getElementById("ascShop");
+const sound = document.getElementById("clickSound");
 
-// UPGRADES
-let upgrades = [
-  {name:"Judgement", power:1, cost:10},
-  {name:"Reckoning", power:3, cost:100},
-  {name:"Thy End", power:2, cost:50},
-];
-
-// ASC SHOP
-let ascUpgrades = [
-  {name:"+50% production", cost:1, effect:1.5},
-  {name:"+100% production", cost:3, effect:2}
-];
-
-// CLICK
+// CLICK AVEC ANIMATION
 minos.onclick = () => {
   blood += bpc * ascBonus;
+
+  // animation scale
+  minos.style.transform = "scale(1.2)";
+  setTimeout(() => {
+    minos.style.transform = "scale(1)";
+  }, 100);
+
+  sound.currentTime = 0;
+  sound.play();
+
   updateUI();
 };
 
@@ -38,9 +35,20 @@ setInterval(() => {
   updateUI();
 }, 1000);
 
+// UPGRADES
+let upgrades = [
+  {name:"Judgement", power:1, cost:10},
+  {name:"Reckoning", power:3, cost:100},
+  {name:"Thy End", power:2, cost:50},
+  {name:"Gore", power:5, cost:200},
+  {name:"Wrath", power:25, cost:5000},
+  {name:"Divine Strike", power:50, cost:12000}
+];
+
 // SHOP
 function renderShop() {
   shopDiv.innerHTML = "";
+
   upgrades.forEach((u,i)=>{
     let div = document.createElement("div");
     div.className="upgrade";
@@ -51,27 +59,19 @@ function renderShop() {
         blood-=u.cost;
         bpc+=u.power;
         u.cost=Math.floor(u.cost*1.5);
+
+        div.style.transform="scale(1.1)";
+        setTimeout(()=>div.style.transform="scale(1)",100);
+
+        sound.currentTime=0;
+        sound.play();
+
         updateUI();
         renderShop();
       }
     };
 
     shopDiv.appendChild(div);
-  });
-}
-
-// ASC SHOP
-function renderAscShop(){
-  ascShopDiv.innerHTML="";
-  ascUpgrades.forEach(u=>{
-    let d=document.createElement("div");
-    d.className="upgrade";
-    d.innerText=u.name+" ("+u.cost+" asc)";
-    d.onclick=()=>{
-      ascBonus*=u.effect;
-      renderAscShop();
-    };
-    ascShopDiv.appendChild(d);
   });
 }
 
@@ -86,18 +86,30 @@ function doAscend(){
     ascCost*=2;
 
     document.getElementById("ascCost").textContent=ascCost;
-
     updateUI();
   }
 }
 
-// PROFILE
+// PROFILE SAVE (LOCAL STORAGE)
 function saveProfile(){
-  document.getElementById("displayName").textContent =
-    document.getElementById("nameInput").value;
+  let name = document.getElementById("nameInput").value;
+  let bio = document.getElementById("bioInput").value;
 
-  document.getElementById("displayBio").textContent =
-    document.getElementById("bioInput").value;
+  localStorage.setItem("name", name);
+  localStorage.setItem("bio", bio);
+
+  loadProfile();
+}
+
+function loadProfile(){
+  let name = localStorage.getItem("name") || "";
+  let bio = localStorage.getItem("bio") || "";
+
+  document.getElementById("displayName").textContent = name;
+  document.getElementById("displayBio").textContent = bio;
+
+  document.getElementById("nameInput").value = name;
+  document.getElementById("bioInput").value = bio;
 }
 
 // TABS
@@ -118,6 +130,5 @@ function updateUI(){
 
 // INIT
 renderShop();
-renderAscShop();
-openTab("shop");
+loadProfile();
 updateUI();
