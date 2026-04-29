@@ -2,30 +2,13 @@ body {
   margin: 0;
   font-family: Arial;
   color: red;
-  background: url("background.png") center/cover no-repeat;
+  background: radial-gradient(circle, #1a0000, #000);
 }
 
-/* overlay sombre */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.75);
-  pointer-events: none;
-}
-
-/* EVENT */
-#eventBox {
-  text-align: center;
-  padding: 10px;
-  font-size: 25px;
-  text-shadow: 0 0 20px red;
-}
-
-/* LAYOUT */
+/* layout */
 .container {
   display: flex;
-  height: 90vh;
+  height: 100vh;
 }
 
 /* LEFT */
@@ -53,28 +36,26 @@ body::before {
 .center::before {
   content: "";
   position: absolute;
-  width: 400px;
-  height: 400px;
+  width: 350px;
+  height: 350px;
   background: radial-gradient(circle, rgba(255,0,0,0.4), transparent);
   border-radius: 50%;
-  filter: blur(50px);
+  filter: blur(40px);
 }
 
 #minos {
   width: 300px;
   cursor: pointer;
-  filter: drop-shadow(0 0 20px cyan)
-          drop-shadow(0 0 40px red)
-          drop-shadow(0 0 80px crimson);
+  filter: drop-shadow(0 0 20px red)
+          drop-shadow(0 0 40px crimson);
   z-index: 2;
-  transition: transform 0.1s;
 }
 
 #minos:active {
   transform: scale(0.9);
 }
 
-/* RIGHT SHOP */
+/* RIGHT */
 .right {
   width: 30%;
   background: rgba(0,0,0,0.7);
@@ -83,7 +64,7 @@ body::before {
   overflow-y: auto;
 }
 
-/* UPGRADES */
+/* shop */
 .upgrade {
   border: 1px solid red;
   padding: 10px;
@@ -98,17 +79,15 @@ body::before {
   color: black;
 }
 
-/* TOOLTIP */
 .tooltip {
   display: none;
   position: absolute;
-  left: -200px;
+  left: -180px;
   top: 0;
-  width: 180px;
+  width: 150px;
   background: black;
   border: 1px solid red;
   padding: 5px;
-  font-size: 12px;
 }
 
 .upgrade:hover .tooltip {
