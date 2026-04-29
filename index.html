@@ -7,6 +7,13 @@
 </head>
 <body>
 
+<!-- TOP BAR -->
+<div class="topbar">
+  <button class="tabBtn" onclick="openTab('shop')">SHOP</button>
+  <button class="tabBtn" onclick="openTab('ascension')">ASCENSION</button>
+  <button class="tabBtn" onclick="openTab('profile')">PROFILE</button>
+</div>
+
 <div class="container">
 
   <!-- GAUCHE -->
@@ -16,7 +23,6 @@
       <p>🩸 <span id="blood">0</span></p>
       <p>⚡ <span id="bps">0</span>/s</p>
       <p>🖱️ <span id="bpc">1</span>/clic</p>
-      <p>🤖 <span id="sps">0</span>/s auto-clic</p>
     </div>
   </div>
 
@@ -28,23 +34,37 @@
   <!-- DROITE -->
   <div class="right">
 
-    <div class="shopHeader">
+    <!-- SHOP -->
+    <div id="shopTab" class="tab">
       <h2>SHOP</h2>
-      <button id="ascendBtn">ASCENSION</button>
+      <div id="shop"></div>
     </div>
 
-    <div id="shop"></div>
+    <!-- ASCENSION -->
+    <div id="ascensionTab" class="tab">
+      <h2>ASCENSION</h2>
+      <p>Coût: <span id="ascCost">10000</span> sang</p>
+      <button onclick="doAscend()">ASCEND</button>
+
+      <h3>Ascension Shop</h3>
+      <div id="ascShop"></div>
+    </div>
+
+    <!-- PROFILE -->
+    <div id="profileTab" class="tab">
+      <h2>PROFILE</h2>
+
+      <input id="nameInput" placeholder="Nom...">
+      <textarea id="bioInput" placeholder="Bio..."></textarea>
+
+      <button onclick="saveProfile()">Save</button>
+
+      <h3 id="displayName"></h3>
+      <p id="displayBio"></p>
+    </div>
+
   </div>
 
-</div>
-
-<!-- PANEL ASCENSION -->
-<div id="ascensionPanel">
-  <h2>ASCENSION</h2>
-  <p>Reset ta progression pour obtenir un boost permanent.</p>
-  <p>Bonus actuel : +50% production</p>
-  <button onclick="doAscend()">ASCEND</button>
-  <button onclick="closeAscend()">FERMER</button>
 </div>
 
 <audio id="clickSound" src="click.mp3"></audio>
