@@ -7,16 +7,16 @@
 </head>
 <body>
 
-<!-- TOP BAR -->
-<div class="topbar">
-  <button class="tabBtn" onclick="openTab('shop')">SHOP</button>
-  <button class="tabBtn" onclick="openTab('ascension')">ASCENSION</button>
-  <button class="tabBtn" onclick="openTab('profile')">PROFILE</button>
+<!-- NAV -->
+<div class="nav">
+  <span onclick="openTab('shop')">SHOP</span>
+  <span onclick="openTab('ascension')">ASCENSION</span>
+  <span onclick="openTab('profile')">PROFILE</span>
 </div>
 
 <div class="container">
 
-  <!-- GAUCHE -->
+  <!-- LEFT -->
   <div class="left">
     <div class="panel">
       <h2>BLOOD</h2>
@@ -26,16 +26,16 @@
     </div>
   </div>
 
-  <!-- CENTRE -->
+  <!-- CENTER -->
   <div class="center">
     <img src="Chibi_minos.png" id="minos">
   </div>
 
-  <!-- DROITE -->
+  <!-- RIGHT -->
   <div class="right">
 
     <!-- SHOP -->
-    <div id="shopTab" class="tab">
+    <div id="shopTab" class="tab active">
       <h2>SHOP</h2>
       <div id="shop"></div>
     </div>
@@ -43,11 +43,8 @@
     <!-- ASCENSION -->
     <div id="ascensionTab" class="tab">
       <h2>ASCENSION</h2>
-      <p>Coût: <span id="ascCost">10000</span> sang</p>
+      <p>Coût: <span id="ascCost">10000</span></p>
       <button onclick="doAscend()">ASCEND</button>
-
-      <h3>Ascension Shop</h3>
-      <div id="ascShop"></div>
     </div>
 
     <!-- PROFILE -->
