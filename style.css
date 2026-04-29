@@ -46,9 +46,7 @@ body {
 #minos {
   width: 300px;
   cursor: pointer;
-  filter: drop-shadow(0 0 20px red)
-          drop-shadow(0 0 40px crimson);
-  z-index: 2;
+  filter: drop-shadow(0 0 20px red);
 }
 
 #minos:active {
@@ -64,7 +62,27 @@ body {
   overflow-y: auto;
 }
 
-/* SHOP BLOCKS PRO */
+/* HEADER SHOP */
+.shopHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#ascendBtn {
+  background: black;
+  border: 1px solid red;
+  color: red;
+  cursor: pointer;
+  padding: 5px;
+}
+
+#ascendBtn:hover {
+  background: red;
+  color: black;
+}
+
+/* SHOP BLOCKS */
 .upgrade {
   background: linear-gradient(145deg, #0a0a0a, #1a0000);
   border: 1px solid crimson;
@@ -73,42 +91,48 @@ body {
   margin-bottom: 12px;
   cursor: pointer;
   position: relative;
-
-  box-shadow: 0 0 10px rgba(255,0,0,0.2);
-  transition: all 0.2s ease;
+  transition: 0.2s;
 }
 
 .upgrade:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 20px red;
   background: crimson;
   color: black;
 }
 
-/* TITRE */
-.upgrade b {
-  font-size: 16px;
+.upgrade.buy {
+  animation: flash 0.3s;
 }
 
-/* TOOLTIP PRO */
+@keyframes flash {
+  0% { background: red; }
+  100% { }
+}
+
+/* TOOLTIP */
 .tooltip {
   position: absolute;
   left: -200px;
   top: 0;
-  width: 180px;
-
   background: black;
   border: 1px solid red;
-  border-radius: 6px;
   padding: 8px;
-  font-size: 12px;
-
   opacity: 0;
-  transform: translateX(-10px);
   transition: 0.2s;
 }
 
 .upgrade:hover .tooltip {
   opacity: 1;
-  transform: translateX(0);
+}
+
+/* ASCENSION PANEL */
+#ascensionPanel {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: black;
+  border: 2px solid red;
+  padding: 20px;
+  display: none;
 }
