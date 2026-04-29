@@ -27,10 +27,24 @@
 
   <!-- DROITE -->
   <div class="right">
-    <h2>SHOP</h2>
+
+    <div class="shopHeader">
+      <h2>SHOP</h2>
+      <button id="ascendBtn">ASCENSION</button>
+    </div>
+
     <div id="shop"></div>
   </div>
 
+</div>
+
+<!-- PANEL ASCENSION -->
+<div id="ascensionPanel">
+  <h2>ASCENSION</h2>
+  <p>Reset ta progression pour obtenir un boost permanent.</p>
+  <p>Bonus actuel : +50% production</p>
+  <button onclick="doAscend()">ASCEND</button>
+  <button onclick="closeAscend()">FERMER</button>
 </div>
 
 <audio id="clickSound" src="click.mp3"></audio>
