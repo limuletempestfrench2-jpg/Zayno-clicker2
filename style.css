@@ -2,7 +2,6 @@ body {
   margin: 0;
   font-family: Arial;
   color: red;
-
   background: url("background.png") center/cover no-repeat;
 }
 
@@ -11,7 +10,8 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.7);
+  background: rgba(0,0,0,0.75);
+  pointer-events: none;
 }
 
 /* EVENT */
@@ -28,7 +28,7 @@ body::before {
   height: 90vh;
 }
 
-/* LEFT PANEL */
+/* LEFT */
 .left {
   width: 20%;
   padding: 15px;
@@ -50,20 +50,24 @@ body::before {
   position: relative;
 }
 
-.circle {
+.center::before {
+  content: "";
   position: absolute;
-  width: 350px;
-  height: 350px;
+  width: 400px;
+  height: 400px;
   background: radial-gradient(circle, rgba(255,0,0,0.4), transparent);
   border-radius: 50%;
-  filter: blur(40px);
+  filter: blur(50px);
 }
 
 #minos {
-  width: 280px;
+  width: 300px;
   cursor: pointer;
-  filter: drop-shadow(0 0 25px cyan);
+  filter: drop-shadow(0 0 20px cyan)
+          drop-shadow(0 0 40px red)
+          drop-shadow(0 0 80px crimson);
   z-index: 2;
+  transition: transform 0.1s;
 }
 
 #minos:active {
