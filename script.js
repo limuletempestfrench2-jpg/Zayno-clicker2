@@ -10,44 +10,32 @@ const spsEl = document.getElementById("sps");
 
 const minos = document.getElementById("minos");
 const shopDiv = document.getElementById("shop");
-const eventBox = document.getElementById("eventBox");
 const sound = document.getElementById("clickSound");
 
 // QUOTES
-const quotes = [
-  "JUDGEMENT!",
-  "USELESS!",
-  "DIE!",
-  "PREPARE THYSELF!",
-  "THY END IS NOW!"
-];
+const quotes = ["JUDGEMENT!", "USELESS!", "DIE!", "PREPARE!", "WEAK!"];
 
-// UPGRADES (ORDRE SP / SPS / SPS / SP)
+// ANTI SPAM
+let activeQuotes = 0;
+let lastQuoteTime = 0;
+
+// UPGRADES (propres + sans les 4 derniers)
 let upgrades = [
   {name:"Judgement", type:"click", power:1, cost:10, desc:"+1 clic"},
-  {name:"Useless", type:"click", power:2, cost:50, desc:"+2 clic"},
-  {name:"Die", type:"click", power:5, cost:150, desc:"+5 clic"},
-  {name:"Prepare Thyself", type:"click", power:10, cost:500, desc:"+10 clic"},
+  {name:"Reckoning", type:"click", power:3, cost:100, desc:"+3 clic"},
 
-  {name:"Thy End", type:"auto", power:1, cost:25, desc:"+1/sec"},
-  {name:"Reckoning", type:"auto", power:3, cost:100, desc:"+3/sec"},
-  {name:"Gore", type:"auto", power:8, cost:300, desc:"+8/sec"},
-  {name:"Steel", type:"auto", power:20, cost:800, desc:"+20/sec"},
-  {name:"Punishment", type:"auto", power:50, cost:2000, desc:"+50/sec"},
+  {name:"Thy End", type:"auto", power:2, cost:50, desc:"+2/sec"},
+  {name:"Gore", type:"auto", power:5, cost:200, desc:"+5/sec"},
 
-  {name:"SP: Overdrive Core", type:"sp", power:2, cost:3000, desc:"Boost global"},
-
-  {name:"SPS: Auto Strike I", type:"sps", power:2, cost:1500, desc:"+2 auto clic/sec"},
-  {name:"SPS: Auto Strike II", type:"sps", power:5, cost:4000, desc:"+5 auto clic/sec"},
-
-  {name:"SP: Blood Protocol", type:"sp", power:5, cost:8000, desc:"Boost massif"}
+  {name:"SP: Overdrive", type:"sp", power:3, cost:500, desc:"boost global"},
+  {name:"SPS: Auto I", type:"sps", power:2, cost:800, desc:"+2 auto clic/sec"},
+  {name:"SPS: Auto II", type:"sps", power:4, cost:1500, desc:"+4 auto clic/sec"}
 ];
 
 // CLICK
 minos.onclick = () => {
   blood += bpc;
   showQuote();
-  clickEffect();
   updateUI();
 
   sound.currentTime = 0;
@@ -60,32 +48,6 @@ setInterval(() => {
   blood += sps * bpc;
   updateUI();
 }, 1000);
-
-// EVENTS
-setInterval(() => {
-  let r = Math.random();
-
-  if (r < 0.3) {
-    eventBox.textContent = "⚡ OVERDRIVE x3";
-    bpc *= 3; bps *= 3;
-
-    setTimeout(() => {
-      bpc /= 3; bps /= 3;
-      eventBox.textContent = "Aucun événement";
-    }, 60000);
-  }
-
-  if (r > 0.7) {
-    eventBox.textContent = "💀 APOCALYPSE x10";
-    bpc *= 10; bps *= 10;
-
-    setTimeout(() => {
-      bpc /= 10; bps /= 10;
-      eventBox.textContent = "Aucun événement";
-    }, 60000);
-  }
-
-}, 120000);
 
 // SHOP
 function renderShop() {
@@ -120,9 +82,7 @@ function buyUpgrade(i) {
       bps += u.power;
     }
 
-    u.cost = Math.floor(u.cost * 1.6);
-    u.power = Math.floor(u.power * 1.2);
-
+    u.cost = Math.floor(u.cost * 1.5);
     updateUI();
     renderShop();
   }
@@ -136,8 +96,15 @@ function updateUI() {
   spsEl.textContent = sps;
 }
 
-// QUOTES RANDOM CENTRE UNIQUEMENT
+// QUOTES (LIMITÉS)
 function showQuote() {
+  const now = Date.now();
+  if (activeQuotes >= 3) return;
+  if (now - lastQuoteTime < 200) return;
+
+  lastQuoteTime = now;
+  activeQuotes++;
+
   const zone = document.querySelector(".center");
 
   let q = document.createElement("div");
@@ -146,35 +113,16 @@ function showQuote() {
   q.style.position = "absolute";
   q.style.color = "red";
   q.style.fontSize = "28px";
-  q.style.fontWeight = "bold";
 
-  let x = Math.random() * 80 + 10;
-  let y = Math.random() * 80 + 10;
-
-  q.style.left = x + "%";
-  q.style.top = y + "%";
+  q.style.left = (Math.random()*80+10) + "%";
+  q.style.top = (Math.random()*80+10) + "%";
 
   zone.appendChild(q);
 
-  setTimeout(() => q.remove(), 600);
-}
-
-// CLICK FX
-function clickEffect() {
-  let fx = document.createElement("div");
-
-  fx.style.position = "absolute";
-  fx.style.width = "20px";
-  fx.style.height = "20px";
-  fx.style.background = "red";
-  fx.style.borderRadius = "50%";
-  fx.style.left = "50%";
-  fx.style.top = "50%";
-  fx.style.transform = "translate(-50%, -50%)";
-  fx.style.boxShadow = "0 0 20px red";
-
-  document.body.appendChild(fx);
-  setTimeout(() => fx.remove(), 200);
+  setTimeout(() => {
+    q.remove();
+    activeQuotes--;
+  }, 500);
 }
 
 // INIT
