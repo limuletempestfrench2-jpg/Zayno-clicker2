@@ -1,30 +1,44 @@
 body {
+  margin: 0;
+  font-family: Arial;
+  color: red;
+
   background: url("background.png") center/cover no-repeat;
 }
-
 
 /* overlay sombre */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.65);
-  pointer-events: none;
+  background: rgba(0,0,0,0.7);
 }
 
-/* layout */
+/* EVENT */
+#eventBox {
+  text-align: center;
+  padding: 10px;
+  font-size: 25px;
+  text-shadow: 0 0 20px red;
+}
+
+/* LAYOUT */
 .container {
   display: flex;
-  height: 100vh;
+  height: 90vh;
 }
 
 /* LEFT PANEL */
 .left {
   width: 20%;
-  padding: 20px;
-  background: rgba(0,0,0,0.6);
-  border-right: 2px solid red;
-  text-shadow: 0 0 10px red;
+  padding: 15px;
+}
+
+.panel {
+  background: rgba(0,0,0,0.7);
+  border: 2px solid red;
+  padding: 10px;
+  box-shadow: 0 0 15px red;
 }
 
 /* CENTER */
@@ -36,44 +50,42 @@ body::before {
   position: relative;
 }
 
-#minos {
-  width: 300px;
-  cursor: pointer;
-  filter: drop-shadow(0 0 25px red);
-  z-index: 2;
-}
-
-.center::before {
-  content: "";
+.circle {
   position: absolute;
-  width: 300px;
-  height: 300px;
+  width: 350px;
+  height: 350px;
   background: radial-gradient(circle, rgba(255,0,0,0.4), transparent);
   border-radius: 50%;
   filter: blur(40px);
+}
+
+#minos {
+  width: 280px;
+  cursor: pointer;
+  filter: drop-shadow(0 0 25px cyan);
+  z-index: 2;
 }
 
 #minos:active {
   transform: scale(0.9);
 }
 
-/* SHOP */
-.shop {
+/* RIGHT SHOP */
+.right {
   width: 30%;
-  padding: 20px;
   background: rgba(0,0,0,0.7);
-  backdrop-filter: blur(6px);
-  overflow-y: auto;
   border-left: 2px solid red;
+  padding: 15px;
+  overflow-y: auto;
 }
 
-/* upgrade */
+/* UPGRADES */
 .upgrade {
-  background: #111;
   border: 1px solid red;
   padding: 10px;
   margin-bottom: 10px;
   cursor: pointer;
+  background: #111;
   position: relative;
 }
 
@@ -82,6 +94,7 @@ body::before {
   color: black;
 }
 
+/* TOOLTIP */
 .tooltip {
   display: none;
   position: absolute;
