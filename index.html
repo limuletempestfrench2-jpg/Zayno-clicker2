@@ -7,7 +7,6 @@
 </head>
 <body>
 
-<!-- NAV -->
 <div class="nav">
   <span onclick="openTab('shop')">SHOP</span>
   <span onclick="openTab('ascension')">ASCENSION</span>
@@ -16,56 +15,39 @@
 
 <div class="container">
 
-  <!-- LEFT -->
   <div class="left">
     <div class="panel">
-      <h2>BLOOD</h2>
       <p>🩸 <span id="blood">0</span></p>
       <p>⚡ <span id="bps">0</span>/s</p>
-      <p>🖱️ <span id="bpc">1</span>/clic</p>
+      <p>🖱️ <span id="bpc">1</span></p>
     </div>
   </div>
 
-  <!-- CENTER -->
   <div class="center">
     <img src="Chibi_minos.png" id="minos">
   </div>
 
-  <!-- RIGHT -->
   <div class="right">
-
-    <!-- SHOP -->
     <div id="shopTab" class="tab active">
-      <h2>SHOP</h2>
       <div id="shop"></div>
     </div>
 
-    <!-- ASCENSION -->
     <div id="ascensionTab" class="tab">
-      <h2>ASCENSION</h2>
-      <p>Coût: <span id="ascCost">10000</span></p>
-      <button onclick="doAscend()">ASCEND</button>
+      <p>Coût: <span id="ascCost"></span></p>
+      <button onclick="ascend()">ASCEND</button>
     </div>
 
-    <!-- PROFILE -->
     <div id="profileTab" class="tab">
-      <h2>PROFILE</h2>
-
-      <input id="nameInput" placeholder="Nom...">
-      <textarea id="bioInput" placeholder="Bio..."></textarea>
-
+      <input id="nameInput">
+      <textarea id="bioInput"></textarea>
       <button onclick="saveProfile()">Save</button>
-
       <h3 id="displayName"></h3>
       <p id="displayBio"></p>
     </div>
-
   </div>
 
 </div>
 
-<audio id="clickSound" src="click.mp3"></audio>
-
-<script src="script.js"></script>
+<script type="module" src="main.js"></script>
 </body>
 </html>
