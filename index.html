@@ -3,8 +3,48 @@
 <head>
 <meta charset="UTF-8">
 <title>Blood Engine</title>
-<link rel="stylesheet" href="style.css">
+<style>
+body { margin:0; background:black; color:red; font-family:Arial; }
+.container { display:flex; height:100vh; }
+.left { width:20%; padding:10px; }
+.right { width:30%; background:#111; padding:10px; }
+.center { flex:1; display:flex; justify-content:center; align-items:center; }
+
+#minos {
+  width:300px;
+  cursor:pointer;
+  transition:0.1s;
+}
+
+.nav {
+  position:fixed;
+  top:10px;
+  right:20px;
+}
+.nav span {
+  margin-left:15px;
+  cursor:pointer;
+}
+.nav span:hover {
+  color:white;
+}
+
+.upgrade {
+  border:1px solid red;
+  padding:8px;
+  margin:5px;
+  cursor:pointer;
+}
+.upgrade:hover {
+  background:red;
+  color:black;
+}
+
+.tab { display:none; }
+.tab.active { display:block; }
+</style>
 </head>
+
 <body>
 
 <div class="nav">
@@ -16,11 +56,9 @@
 <div class="container">
 
   <div class="left">
-    <div class="panel">
-      <p>🩸 <span id="blood">0</span></p>
-      <p>⚡ <span id="bps">0</span>/s</p>
-      <p>🖱️ <span id="bpc">1</span></p>
-    </div>
+    <p>🩸 <span id="blood">0</span></p>
+    <p>⚡ <span id="bps">0</span>/s</p>
+    <p>🖱️ <span id="bpc">1</span></p>
   </div>
 
   <div class="center">
@@ -28,26 +66,144 @@
   </div>
 
   <div class="right">
+
     <div id="shopTab" class="tab active">
       <div id="shop"></div>
     </div>
 
     <div id="ascensionTab" class="tab">
-      <p>Coût: <span id="ascCost"></span></p>
+      <p>Coût: <span id="ascCost">10000</span></p>
       <button onclick="ascend()">ASCEND</button>
     </div>
 
     <div id="profileTab" class="tab">
-      <input id="nameInput">
-      <textarea id="bioInput"></textarea>
+      <input id="nameInput" placeholder="Nom">
+      <textarea id="bioInput" placeholder="Bio"></textarea>
       <button onclick="saveProfile()">Save</button>
       <h3 id="displayName"></h3>
       <p id="displayBio"></p>
     </div>
+
   </div>
 
 </div>
 
-<script type="module" src="main.js"></script>
+<script>
+/* ===== GAME ===== */
+let player = {
+  blood: 0,
+  bpc: 1,
+  bps: 0,
+  ascCost: 10000,
+  ascBonus: 1
+};
+
+/* ===== CLICK ===== */
+const minos = document.getElementById("minos");
+
+minos.onclick = () => {
+  let gain = player.bpc;
+
+  if (Math.random() < 0.1) {
+    gain *= 5;
+  }
+
+  player.blood += gain;
+
+  minos.style.transform = "scale(1.2)";
+  setTimeout(()=>minos.style.transform="scale(1)",100);
+
+  updateUI();
+};
+
+/* ===== PASSIVE ===== */
+setInterval(()=>{
+  player.blood += player.bps * player.ascBonus;
+  updateUI();
+},1000);
+
+/* ===== UPGRADES ===== */
+let upgrades = [
+  {name:"Judgement", cost:10, effect:()=>player.bpc+=1},
+  {name:"Gore Engine", cost:100, effect:()=>player.bps+=1}
+];
+
+function renderShop(){
+  let shop = document.getElementById("shop");
+  shop.innerHTML="";
+
+  upgrades.forEach(u=>{
+    let div=document.createElement("div");
+    div.className="upgrade";
+    div.innerText = u.name+" ("+u.cost+")";
+
+    div.onclick=()=>{
+      if(player.blood>=u.cost){
+        player.blood-=u.cost;
+        u.effect();
+        u.cost=Math.floor(u.cost*1.5);
+        updateUI();
+        renderShop();
+      }
+    };
+
+    shop.appendChild(div);
+  });
+}
+
+/* ===== ASCENSION ===== */
+function ascend(){
+  if(player.blood>=player.ascCost){
+    player.blood=0;
+    player.bpc=1;
+    player.bps=0;
+
+    player.ascBonus+=0.5;
+    player.ascCost*=2;
+
+    updateUI();
+  }
+}
+
+/* ===== PROFILE ===== */
+function saveProfile(){
+  localStorage.setItem("name", nameInput.value);
+  localStorage.setItem("bio", bioInput.value);
+
+  displayName.innerText = nameInput.value;
+  displayBio.innerText = bioInput.value;
+}
+
+/* ===== LOAD PROFILE ===== */
+function loadProfile(){
+  let name = localStorage.getItem("name") || "";
+  let bio = localStorage.getItem("bio") || "";
+
+  nameInput.value = name;
+  bioInput.value = bio;
+  displayName.innerText = name;
+  displayBio.innerText = bio;
+}
+
+/* ===== UI ===== */
+function updateUI(){
+  blood.textContent = Math.floor(player.blood);
+  bpc.textContent = player.bpc;
+  bps.textContent = player.bps;
+  ascCost.textContent = player.ascCost;
+}
+
+/* ===== TABS ===== */
+function openTab(tab){
+  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+  document.getElementById(tab+"Tab").classList.add("active");
+}
+
+/* ===== INIT ===== */
+renderShop();
+loadProfile();
+updateUI();
+</script>
+
 </body>
 </html>
