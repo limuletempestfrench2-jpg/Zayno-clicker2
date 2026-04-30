@@ -1,48 +1,18 @@
 body {
   margin: 0;
-  font-family: Arial;
+  background: black;
   color: red;
-  background: radial-gradient(circle, #1a0000, #000);
+  font-family: Arial;
 }
 
-/* NAV TOP RIGHT */
-.nav {
-  position: fixed;
-  top: 10px;
-  right: 20px;
-}
-
-.nav span {
-  margin-left: 15px;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.nav span:hover {
-  color: white;
-  text-shadow: 0 0 10px red;
-  transform: scale(1.2);
-}
-
-/* layout */
 .container {
   display: flex;
   height: 100vh;
 }
 
-/* LEFT */
-.left {
-  width: 20%;
-  padding: 15px;
-}
+.left { width: 20%; padding: 10px; }
+.right { width: 30%; padding: 10px; background: #111; }
 
-.panel {
-  background: rgba(0,0,0,0.7);
-  border: 2px solid red;
-  padding: 10px;
-}
-
-/* CENTER */
 .center {
   flex: 1;
   display: flex;
@@ -53,43 +23,26 @@ body {
 #minos {
   width: 300px;
   cursor: pointer;
-  transition: transform 0.1s;
+  transition: 0.1s;
 }
 
-/* RIGHT */
-.right {
-  width: 30%;
-  background: rgba(0,0,0,0.7);
-  border-left: 2px solid red;
-  padding: 15px;
-  overflow-y: auto;
+.nav {
+  position: fixed;
+  right: 20px;
+  top: 10px;
 }
 
-/* TABS */
-.tab { display: none; }
-.tab.active { display: block; }
-
-/* SHOP BLOCKS */
-.upgrade {
-  background: #111;
-  border: 1px solid red;
-  padding: 10px;
-  margin-bottom: 10px;
+.nav span {
+  margin-left: 10px;
   cursor: pointer;
-  transition: 0.2s;
 }
 
-.upgrade:hover {
-  background: red;
-  color: black;
-  transform: scale(1.05);
-}
+.tab { display:none; }
+.tab.active { display:block; }
 
-/* INPUT */
-input, textarea {
-  width: 100%;
-  margin-bottom: 10px;
-  background: black;
-  color: red;
-  border: 1px solid red;
+.upgrade {
+  border:1px solid red;
+  padding:8px;
+  margin:5px;
+  cursor:pointer;
 }
